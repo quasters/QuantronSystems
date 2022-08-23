@@ -19,7 +19,7 @@ class LayoutCreator {
             let trailingItem = NSCollectionLayoutItem(layoutSize: trailingItemSize)
             
             let trailingGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                           heightDimension: .fractionalHeight(0.4))
+                                                           heightDimension: .fractionalHeight(0.5))
             let trailingGroup = NSCollectionLayoutGroup.horizontal(layoutSize: trailingGroupSize, subitem: trailingItem, count: 2)
             
             let section = NSCollectionLayoutSection(group: trailingGroup)

@@ -32,7 +32,7 @@ enum TabBarPage {
     func titleValue() -> String {
         switch self {
         case .main:
-            return "Main"
+            return "Home"
         case .search:
             return "Search"
         }
