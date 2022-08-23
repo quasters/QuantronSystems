@@ -9,9 +9,7 @@ import UIKit
 
 extension UIImageView {
     func downloadFrom(urlString: String) {
-        let network: NetworkDataFetcherProtocol = NetworkDataFetcher()
-        print("-----------------urlString = \(urlString)")
-        network.fetchImage(urlString: urlString) { image in
+        NetworkDataFetcher.shared.fetchImage(urlString: urlString) { image in
             self.image = image
         }
     }

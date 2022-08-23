@@ -17,7 +17,7 @@ final class MainVM: MainViewModelInput {
     private var coordinator: Coordinator
     private let network: NetworkDataFetcherProtocol
     
-    init(coordinator: Coordinator, network: NetworkDataFetcherProtocol = NetworkDataFetcher()) {
+    init(coordinator: Coordinator, network: NetworkDataFetcherProtocol = NetworkDataFetcher.shared) {
         self.coordinator = coordinator
         self.network = network
     }

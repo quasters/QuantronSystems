@@ -9,11 +9,15 @@ import Foundation
 import UIKit
 
 protocol NetworkDataFetcherProtocol: AnyObject {
+    static var shared: NetworkDataFetcherProtocol { get }
     func fetchData<T>(urlString: String, httpMethod: HTTPMethod, response: @escaping (T?) -> Void) where T: Decodable
     func fetchImage(urlString: String, response: @escaping (UIImage?) -> Void)
 }
 
 final class NetworkDataFetcher: NetworkDataFetcherProtocol {
+    static let shared: NetworkDataFetcherProtocol = NetworkDataFetcher()
+    private init(){}
+    
     private let networkService: NetworkServiceProtocol = NetworkService()
     
     public func fetchData<T>(urlString: String, httpMethod: HTTPMethod, response: @escaping (T?) -> Void) where T: Decodable {
