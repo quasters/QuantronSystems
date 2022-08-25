@@ -90,7 +90,7 @@
 			children = (
 				D10C633528B795F4001F9A7A /* ViewModels */,
 				D10C633128B7959D001F9A7A /* Views */,
-				D10C633A28B7A29C001F9A7A /* DetailInfoModel.swift */,
+				D10C633C28B7B9AF001F9A7A /* Models */,
 			);
 			path = "InfoModule ";
 			sourceTree = "<group>";
@@ -118,6 +118,22 @@
 				D10C633628B7960D001F9A7A /* InfoVM.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D10C633C28B7B9AF001F9A7A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D10C633A28B7A29C001F9A7A /* DetailInfoModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D10C633D28B7B9BB001F9A7A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1C34D4028B3E0E1005F138C /* MainModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D1C34CF528B3C3EB005F138C = {
@@ -198,7 +214,7 @@
 			children = (
 				D10C633228B795AE001F9A7A /* ViewModels */,
 				D1C34D4228B3E9E5005F138C /* Views */,
-				D1C34D4028B3E0E1005F138C /* MainModel.swift */,
+				D10C633D28B7B9BB001F9A7A /* Models */,
 			);
 			path = "MainModule ";
 			sourceTree = "<group>";

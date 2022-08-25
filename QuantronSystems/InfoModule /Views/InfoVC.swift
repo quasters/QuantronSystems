@@ -12,7 +12,11 @@ class InfoVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .white
+        
+        viewModel?.dataRequest(urlString: "https://api.themoviedb.org/3/movie/\(viewModel?.movie_id ?? 0)?api_key=3976da82325caf5b8df23f3e91560b5b&language=en-US",
+                               httpMethod: .get) { model in
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

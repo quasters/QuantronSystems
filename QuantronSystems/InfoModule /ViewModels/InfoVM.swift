@@ -8,12 +8,14 @@
 import Foundation
 
 protocol InfoViewModelInput: AnyObject {
-    
+    var movie_id: Int { get }
+    func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping (DetailInfoModel?) -> Void)
 }
 
 final class InfoVM: InfoViewModelInput {
+    var movie_id: Int
+    
     private var completion: (() -> Void)?
-    private var movie_id: Int
     private var network: NetworkDataFetcherProtocol
     
     init(movie_id: Int, completion: (() -> Void)?, network: NetworkDataFetcherProtocol = NetworkDataFetcher()) {
@@ -22,13 +24,9 @@ final class InfoVM: InfoViewModelInput {
         self.network = network
     }
     
-//    func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping () -> Void) {
-//        network.fetchData(urlString: urlString, httpMethod: httpMethod) { (movies: MovieList?) in
-//            guard let movies = movies else { return }
-//            self.movies = movies
-//            completion()
-//        }
-//    }
-    
-    // "https://api.themoviedb.org/3/movie/\(movie_id)?api_key=3976da82325caf5b8df23f3e91560b5b&language=en-US"
+    func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping (DetailInfoModel?) -> Void) {
+        network.fetchData(urlString: urlString, httpMethod: httpMethod) { (movie: DetailInfoModel?) in
+            completion(movie)
+        }
+    }
 }

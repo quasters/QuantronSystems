@@ -19,8 +19,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
             
             setUpPosterImageView()
             setUpTitleLabel()
-            
-            print(item?.id)
+
             self.addSubview(activityIndicator)
             self.addSubview(posterImageView)
             self.addSubview(titleLabel)
