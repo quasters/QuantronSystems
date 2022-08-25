@@ -16,8 +16,6 @@ final class MainVC: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
        
-        print("HI")
-        
         setCollectionBackgroundView()
         if let collectionBackgroundView = collectionBackgroundView {
             self.view.addSubview(collectionBackgroundView)

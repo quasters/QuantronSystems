@@ -9,7 +9,7 @@ import UIKit
 
 class CollectionBackgroundView: UIView {
     private var collectionView: UICollectionView?
-    
+
     var items: MainModel? {
         didSet {
             collectionView?.reloadData()
@@ -45,11 +45,9 @@ extension CollectionBackgroundView: UICollectionViewDelegate, UICollectionViewDa
               let item = items?.results?[indexPath.row] else {
             return UICollectionViewCell()
         }
-        
-        let urlString = "https://image.tmdb.org/t/p/original\(item.poster_path ?? "0")"
-        cell.configure(imageURLString: urlString, title: item.title ?? item.name ?? "Unknown")
-        
+        cell.item = item
         return cell
     }
+    
     
 }

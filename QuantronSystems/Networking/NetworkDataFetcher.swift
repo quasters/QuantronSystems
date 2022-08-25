@@ -9,15 +9,10 @@ import Foundation
 import UIKit
 
 protocol NetworkDataFetcherProtocol: AnyObject {
-    static var shared: NetworkDataFetcherProtocol { get }
     func fetchData<T>(urlString: String, httpMethod: HTTPMethod, response: @escaping (T?) -> Void) where T: Decodable
-    func fetchImage(urlString: String, response: @escaping (UIImage?) -> Void)
 }
 
 final class NetworkDataFetcher: NetworkDataFetcherProtocol {
-    static let shared: NetworkDataFetcherProtocol = NetworkDataFetcher()
-    private init(){}
-    
     private let networkService: NetworkServiceProtocol = NetworkService()
     
     public func fetchData<T>(urlString: String, httpMethod: HTTPMethod, response: @escaping (T?) -> Void) where T: Decodable {
@@ -30,19 +25,6 @@ final class NetworkDataFetcher: NetworkDataFetcherProtocol {
                 } catch let jsonError {
                     print("Failed to decode JSON:", jsonError)
                 }
-            case .failure(let error):
-                print("Error received requesting data: ", error)
-                response(nil)
-            }
-        }
-    }
-    
-    public func fetchImage(urlString: String, response: @escaping (UIImage?) -> Void) {
-        networkService.request(urlString: urlString, httpMethod: .none) { result in
-            switch result {
-            case .success(let data):
-                let image = UIImage(data: data)
-                response(image)
             case .failure(let error):
                 print("Error received requesting data: ", error)
                 response(nil)

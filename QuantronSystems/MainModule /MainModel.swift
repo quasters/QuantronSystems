@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 struct MainModel: Decodable {
-    var results: [Movies]?
+    var results: [Movie]?
 }
 
-struct Movies: Decodable {
+struct Movie: Decodable {
     var id: Int?
     var poster_path: String?
     var name: String?
