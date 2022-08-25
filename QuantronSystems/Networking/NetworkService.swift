@@ -34,8 +34,4 @@ final class NetworkService: NetworkServiceProtocol {
             }
         }.resume()
     }
-    
-    public func photoRequest(urlString: String, completion: @escaping (UIImage?) -> Void) {
-        
-    }
 }

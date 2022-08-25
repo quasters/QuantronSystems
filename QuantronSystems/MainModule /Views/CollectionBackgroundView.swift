@@ -10,7 +10,7 @@ import UIKit
 class CollectionBackgroundView: UIView {
     private var collectionView: UICollectionView?
 
-    var items: MainModel? {
+    var items: MovieList? {
         didSet {
             collectionView?.reloadData()
         }
@@ -53,6 +53,6 @@ extension CollectionBackgroundView: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = items?.results?[indexPath.row]
         let dictionary = ["id": item?.id]
-        NotificationCenter.default.post(name: NSNotification.Name("showInfo"), object: nil, userInfo: dictionary)
+        NotificationCenter.default.post(name: NSNotification.Name("showInfo"), object: nil, userInfo: dictionary as [AnyHashable : Any])
     }
 }

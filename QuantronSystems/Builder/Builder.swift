@@ -8,9 +8,9 @@
 import UIKit
 
 final class Builder: BuilderProtocol {
-    func createMainModule(coordinator: Coordinator) -> UIViewController {
+    func createMainModule(showInfoWithId: ((Int) -> Void)?) -> UIViewController {
         let vc = MainVC()
-        let vm = MainVM(coordinator: coordinator)
+        let vm = MainVM(showInfoWithId: showInfoWithId)
         vc.viewModel = vm
         return vc
     }
@@ -18,6 +18,13 @@ final class Builder: BuilderProtocol {
     func createSearchModule(coordinator: Coordinator) -> UIViewController {
         let vc = SearchVC()
         let vm = SearchVM(coordinator: coordinator)
+        vc.viewModel = vm
+        return vc
+    }
+    
+    func createInfoModule(movie_id: Int, completion: (() -> Void)?) -> UIViewController {
+        let vc = InfoVC()
+        let vm = InfoVM(movie_id: movie_id,completion: completion)
         vc.viewModel = vm
         return vc
     }

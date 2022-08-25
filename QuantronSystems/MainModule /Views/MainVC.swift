@@ -14,24 +14,27 @@ final class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
-       
+        self.title = "Popular Movies"
+        
         setCollectionBackgroundView()
         if let collectionBackgroundView = collectionBackgroundView {
             self.view.addSubview(collectionBackgroundView)
             addConstraints()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: NSNotification.Name("showInfo"), object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         viewModel?.dataRequest(urlString: "https://api.themoviedb.org/3/trending/all/day?api_key=3976da82325caf5b8df23f3e91560b5b",
                                httpMethod: .get) { [collectionBackgroundView, viewModel] in
             collectionBackgroundView?.items = viewModel?.movies
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: NSNotification.Name("showInfo"), object: nil)
+    }
+
+    @objc
+    private func showInfo(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let userInfoId = userInfo["id"] as? Int else { return }
+        viewModel?.pushItemToShow(id: userInfoId)
     }
     
     private func setCollectionBackgroundView() {
@@ -49,12 +52,6 @@ final class MainVC: UIViewController {
             collectionBackgroundView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             collectionBackgroundView.widthAnchor.constraint(equalTo: self.view.widthAnchor)
         ])
-    }
-
-    @objc private func showInfo(notification: Notification) {
-        guard let userInfo = notification.userInfo else { return }
-        guard let userInfoId = userInfo["id"] as? Int else { return }
-        print(userInfoId)
     }
 }
 
