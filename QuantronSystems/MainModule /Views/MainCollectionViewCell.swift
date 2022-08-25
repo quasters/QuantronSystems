@@ -46,8 +46,6 @@ final class MainCollectionViewCell: UICollectionViewCell {
             titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: indent),
             titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -indent),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -indent),
-            //titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            //titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor)
         ])
     }
     

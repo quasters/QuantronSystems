@@ -22,6 +22,7 @@ final class MainVC: UIViewController {
             addConstraints()
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: NSNotification.Name("showInfo"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,5 +51,10 @@ final class MainVC: UIViewController {
         ])
     }
 
+    @objc private func showInfo(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let userInfoId = userInfo["id"] as? Int else { return }
+        print(userInfoId)
+    }
 }
 

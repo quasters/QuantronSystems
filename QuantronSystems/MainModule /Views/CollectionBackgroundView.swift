@@ -17,6 +17,7 @@ class CollectionBackgroundView: UIView {
     }
     
     public func configure() {
+        self.isUserInteractionEnabled = true
         collectionView = UICollectionView(frame: self.frame, collectionViewLayout: LayoutCreator.shared.createMainCollectionLayout())
         guard let collectionView = collectionView else { return }
         
@@ -49,5 +50,9 @@ extension CollectionBackgroundView: UICollectionViewDelegate, UICollectionViewDa
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = items?.results?[indexPath.row]
+        let dictionary = ["id": item?.id]
+        NotificationCenter.default.post(name: NSNotification.Name("showInfo"), object: nil, userInfo: dictionary)
+    }
 }
