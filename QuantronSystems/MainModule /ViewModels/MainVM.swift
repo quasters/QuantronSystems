@@ -8,7 +8,7 @@
 import Foundation
 
 final class MainVM: MainViewModelInput {
-    var movies = MovieList()
+    public var movies = MovieList()
     
     private var showInfoWithId: ((Int) -> Void)?
     private let network: NetworkDataFetcherProtocol
@@ -18,7 +18,7 @@ final class MainVM: MainViewModelInput {
         self.network = network
     }
     
-    func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping () -> Void) {
+    public func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping () -> Void) {
         network.fetchData(urlString: urlString, httpMethod: httpMethod) { (movies: MovieList?) in
             guard let movies = movies else { return }
             self.movies = movies
@@ -26,7 +26,7 @@ final class MainVM: MainViewModelInput {
         }
     }
     
-    func pushItemToShow(id: Int) {
+    public func pushItemToShow(id: Int) {
         showInfoWithId?(id)
     }
 }

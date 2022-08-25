@@ -11,7 +11,7 @@ class LayoutCreator {
     static let shared = LayoutCreator()
     private init(){}
     
-    func createMainCollectionLayout() -> UICollectionViewLayout {
+    public func createMainCollectionLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             
             let trailingItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -19,7 +19,7 @@ class LayoutCreator {
             let trailingItem = NSCollectionLayoutItem(layoutSize: trailingItemSize)
             
             let trailingGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                           heightDimension: .fractionalHeight(0.5))
+                                                           heightDimension: .fractionalWidth(1.0 / 9 * 8))
             let trailingGroup = NSCollectionLayoutGroup.horizontal(layoutSize: trailingGroupSize, subitem: trailingItem, count: 2)
             
             let section = NSCollectionLayoutSection(group: trailingGroup)

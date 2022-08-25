@@ -10,15 +10,15 @@ import UIKit
 final class TabBarCoordinator: TabBarCoordinatorProtocol {
     weak var finishDelegate: CoordinatorFinishDelegate?
     
-    var tabBarController: UITabBarController
+    public var tabBarController: UITabBarController
     
-    var navigationController: UINavigationController
+    public var navigationController: UINavigationController
     
-    var childCoordinators = [Coordinator]()
+    public var childCoordinators = [Coordinator]()
     
-    var type: CoordinatorType = .tab
+    public var type: CoordinatorType = .tab
     
-    var builder: BuilderProtocol
+    private var builder: BuilderProtocol
     
     required init(_ navigationController: UINavigationController, builder: BuilderProtocol = Builder()) {
         self.navigationController = navigationController
@@ -29,17 +29,17 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
         self.builder = builder
     }
     
-    func start() {
+    public func start() {
         let pages: [TabBarPage] = [.main, .search]
         let controllers = pages.map({ getTabControllers($0) })
         prepareTabBarModule(withTabControllers: controllers)
     }
     
-    func selectPage(_ page: TabBarPage) {
+    public func selectPage(_ page: TabBarPage) {
         tabBarController.selectedIndex = page.pageOrderNumber()
     }
     
-    func currentPage() -> TabBarPage? {
+    public func currentPage() -> TabBarPage? {
         return TabBarPage.init(index: tabBarController.selectedIndex)
     }
     

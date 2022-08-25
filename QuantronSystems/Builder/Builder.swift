@@ -8,21 +8,21 @@
 import UIKit
 
 final class Builder: BuilderProtocol {
-    func createMainModule(showInfoWithId: ((Int) -> Void)?) -> UIViewController {
+    public func createMainModule(showInfoWithId: ((Int) -> Void)?) -> UIViewController {
         let vc = MainVC()
         let vm = MainVM(showInfoWithId: showInfoWithId)
         vc.viewModel = vm
         return vc
     }
     
-    func createSearchModule(coordinator: Coordinator) -> UIViewController {
+    public func createSearchModule(coordinator: Coordinator) -> UIViewController {
         let vc = SearchVC()
         let vm = SearchVM(coordinator: coordinator)
         vc.viewModel = vm
         return vc
     }
     
-    func createInfoModule(movie_id: Int, completion: (() -> Void)?) -> UIViewController {
+    public func createInfoModule(movie_id: Int, completion: (() -> Void)?) -> UIViewController {
         let vc = InfoVC()
         let vm = InfoVM(movie_id: movie_id,completion: completion)
         vc.viewModel = vm

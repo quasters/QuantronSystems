@@ -8,19 +8,14 @@
 import UIKit
 
 final class MainCollectionViewCell: UICollectionViewCell {
-    var posterImageView = CachedImageView()
+    private let posterImageView = CachedImageView()
     private var titleLabel = UILabel()
-    private let activityIndicator = UIActivityIndicatorView()
     
-    var item: MainInfoAboutMovie? {
+    public var item: MainInfoAboutMovie? {
         didSet {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-            
             setUpPosterImageView()
             setUpTitleLabel()
 
-            self.addSubview(activityIndicator)
             self.addSubview(posterImageView)
             self.addSubview(titleLabel)
             addConstraints()
@@ -29,11 +24,8 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private func setUpPosterImageView() {
         let urlString = "https://image.tmdb.org/t/p/w500\(item?.poster_path ?? "0")"
-        posterImageView.loadImage(urlString: urlString) { [activityIndicator] in
-            activityIndicator.isHidden = true
-            activityIndicator.stopAnimating()
-        }
-        posterImageView.contentMode = .scaleToFill
+        posterImageView.loadImage(urlString: urlString)
+        posterImageView.contentMode = .scaleAspectFill
         posterImageView.layer.cornerRadius = 8
         posterImageView.layer.masksToBounds = true
     }
@@ -48,15 +40,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private func addConstraints() {
         let indent: CGFloat = 5.0
-        
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activityIndicator.widthAnchor.constraint(equalTo: self.posterImageView.widthAnchor),
-            activityIndicator.heightAnchor.constraint(equalTo: self.posterImageView.heightAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: self.posterImageView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: self.posterImageView.centerYAnchor)
-        ])
-        
+                
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: indent),

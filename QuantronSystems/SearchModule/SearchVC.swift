@@ -8,7 +8,7 @@
 import UIKit
 
 final class SearchVC: UIViewController {
-    var viewModel: SearchViewModelInput?
+    public var viewModel: SearchViewModelInput?
     
     override func viewDidLoad() {
         super.viewDidLoad()

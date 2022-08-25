@@ -10,24 +10,24 @@ import UIKit
 
 class AppCoordinator: AppCoordinatorProtocol {
     
-    var finishDelegate: CoordinatorFinishDelegate?
+    public var finishDelegate: CoordinatorFinishDelegate?
     
-    var navigationController: UINavigationController
+    public var navigationController: UINavigationController
     
-    var childCoordinators = [Coordinator]()
+    public var childCoordinators = [Coordinator]()
     
-    var type: CoordinatorType = .app
+    public var type: CoordinatorType = .app
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
-    func start() {
+    public func start() {
         showMainFlow()
     }
     
-    func showMainFlow() {
+    public func showMainFlow() {
         let tabBarCoordinator: TabBarCoordinatorProtocol = TabBarCoordinator(navigationController)
         tabBarCoordinator.finishDelegate = self
         tabBarCoordinator.start()
@@ -36,7 +36,7 @@ class AppCoordinator: AppCoordinatorProtocol {
 }
 
 extension AppCoordinator: CoordinatorFinishDelegate {
-    func coordinatorDidFinish(childCoordinator: Coordinator) {
+    public func coordinatorDidFinish(childCoordinator: Coordinator) {
         
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         

@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainVC: UIViewController {
-    var viewModel: MainViewModelInput?
+    public var viewModel: MainViewModelInput?
     
     private var collectionBackgroundView: CollectionBackgroundView?
     

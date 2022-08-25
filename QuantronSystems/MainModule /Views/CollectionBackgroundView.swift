@@ -10,7 +10,7 @@ import UIKit
 class CollectionBackgroundView: UIView {
     private var collectionView: UICollectionView?
 
-    var items: MovieList? {
+    public var items: MovieList? {
         didSet {
             collectionView?.reloadData()
         }
