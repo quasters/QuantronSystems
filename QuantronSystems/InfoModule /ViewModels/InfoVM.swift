@@ -9,13 +9,11 @@ import Foundation
 
 protocol InfoViewModelInput: AnyObject {
     var movie_id: Int { get }
-    var movie: DetailInfoModel? { get }
-    func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: (() -> Void)?)
+    func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping (DetailInfoModel?) -> Void)
 }
 
 final class InfoVM: InfoViewModelInput {
     public var movie_id: Int
-    public var movie: DetailInfoModel?
     
     private var completion: (() -> Void)?
     private var network: NetworkDataFetcherProtocol
@@ -26,10 +24,10 @@ final class InfoVM: InfoViewModelInput {
         self.network = network
     }
     
-    public func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: (() -> Void)?) {
+    public func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping (DetailInfoModel?) -> Void) {
         network.fetchData(urlString: urlString, httpMethod: httpMethod) { (movie: DetailInfoModel?) in
-            self.movie = movie
-            completion?()
+            //self.movie = movie
+            completion(movie)
         }
     }
 }

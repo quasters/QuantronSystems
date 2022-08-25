@@ -11,6 +11,16 @@ class InfoVC: UIViewController {
     public var viewModel: InfoViewModelInput?
     private let tableView = UITableView()
     private var header = StretchyTableHeaderView()
+    private var movie: DetailInfoModel? {
+        didSet {
+            self.title = movie?.title
+            
+            let urlString = "https://image.tmdb.org/t/p/w500\(movie?.poster_path ?? "/0")"
+            self.header.cachedImageView.loadImage(urlString: urlString)
+            
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,26 +29,13 @@ class InfoVC: UIViewController {
         setNavigationStyle()
         addTableView()
         
-        
-        
         header = StretchyTableHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height / 1.75))
-        
-        
-        
-        viewModel?.dataRequest(urlString: "https://api.themoviedb.org/3/movie/\(viewModel?.movie_id ?? 0)?api_key=3976da82325caf5b8df23f3e91560b5b&language=en-US",
-                               httpMethod: .get) { [weak self] in
-            self?.tableView.reloadData()
-            let urlString = "https://image.tmdb.org/t/p/original\(self?.viewModel?.movie?.poster_path ?? "/0")"
-            self?.header.cachedImageView.loadImage(urlString: urlString)
-            self?.title = self?.viewModel?.movie?.title
-        }
-        
         self.tableView.tableHeaderView = header
         
-        
-
-        
-        
+        viewModel?.dataRequest(urlString: "https://api.themoviedb.org/3/movie/\(viewModel?.movie_id ?? 0)?api_key=3976da82325caf5b8df23f3e91560b5b&language=en-US",
+                               httpMethod: .get) { movie in
+            self.movie = movie
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +48,9 @@ class InfoVC: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     
+    
+    
+    
     private func setNavigationStyle() {
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -62,7 +62,7 @@ class InfoVC: UIViewController {
         tableView.dataSource = self
         tableView.frame = self.view.bounds
         tableView.center = self.view.center
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .none
         
         self.view.addSubview(tableView)
         
@@ -77,27 +77,34 @@ class InfoVC: UIViewController {
 
 
 
-
-
-
-
-
-
-
-
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension InfoVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 28
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = "Hi"
-        return cell!
+        let cell = InfoTableViewCell()
+        switch indexPath.row {
+        case 0:
+            cell.configure(title: "Overview", value: movie?.overview)
+        case 1:
+            var genres = ""
+            if let genresArray = movie?.genres?.map({ $0.name ?? "" }) {
+                genres = genresArray.joined(separator: ", ")
+            }
+            cell.configure(title: "Genres", value: genres)
+        case 2:
+            let durationString = String(movie?.runtime ?? 0) + " minutes"
+            cell.configure(title: "Duration", value: durationString)
+        case 3:
+            cell.configure(title: "Release", value: movie?.release_date)
+        default:
+            cell.configure(title: "Error", value: nil)
+        }
+        
+        return cell
     }
-    
-    
 }
 
 

@@ -14,7 +14,7 @@ protocol SearchViewModelInput {
 final class SearchVM: SearchViewModelInput {
     private var coordinator: Coordinator
     
-    init(coordinator: Coordinator) {
-        self.coordinator = coordinator
+    init() {
+        
     }
 }
