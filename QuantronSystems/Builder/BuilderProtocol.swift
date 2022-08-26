@@ -9,7 +9,7 @@ import UIKit
 
 protocol BuilderProtocol:  AnyObject {
     func createMainModule(showInfoWithId: ((Int) -> Void)?) -> UIViewController
-    func createSearchModule(coordinator: Coordinator) -> UIViewController
+    func createSearchModule(completion: ((Int) -> Void)?) -> UIViewController
     func createInfoModule(movie_id: Int, completion: (() -> Void)?) -> UIViewController
 }
 

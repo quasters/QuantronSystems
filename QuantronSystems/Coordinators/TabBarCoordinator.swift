@@ -58,8 +58,9 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
             navController.pushViewController(vc, animated: true)
             
         case .search:
-            let vc = builder.createSearchModule(coordinator: self)
-            // ...
+            let vc = builder.createSearchModule { [weak self] id in
+                self?.showInfoModule(with: id)
+            }
             navController.pushViewController(vc, animated: true)
         }
         
@@ -68,6 +69,7 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
     
     private func showInfoModule(with id: Int) {
         let vc = builder.createInfoModule(movie_id: id, completion: nil)
+        print("ok")
         navigationController.pushViewController(vc, animated: true)
     }
     

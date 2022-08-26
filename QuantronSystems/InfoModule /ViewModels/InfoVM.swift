@@ -26,7 +26,6 @@ final class InfoVM: InfoViewModelInput {
     
     public func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping (DetailInfoModel?) -> Void) {
         network.fetchData(urlString: urlString, httpMethod: httpMethod) { (movie: DetailInfoModel?) in
-            //self.movie = movie
             completion(movie)
         }
     }

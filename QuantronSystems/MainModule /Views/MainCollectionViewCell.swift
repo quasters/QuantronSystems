@@ -23,7 +23,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUpPosterImageView() {
-        let urlString = "https://image.tmdb.org/t/p/w500\(item?.poster_path ?? "0")"
+        let urlString = Links.imageLink(item?.poster_path).rawValue
         posterImageView.loadImage(urlString: urlString)
         posterImageView.contentMode = .scaleAspectFill
         posterImageView.layer.cornerRadius = 8

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct MovieList: Decodable {
     var results: [MainInfoAboutMovie]?

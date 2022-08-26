@@ -15,7 +15,7 @@ class InfoVC: UIViewController {
         didSet {
             self.title = movie?.title
             
-            let urlString = "https://image.tmdb.org/t/p/w500\(movie?.poster_path ?? "/0")"
+            let urlString = Links.imageLink(movie?.poster_path).rawValue
             self.header.cachedImageView.loadImage(urlString: urlString)
             
             self.tableView.reloadData()
@@ -32,9 +32,9 @@ class InfoVC: UIViewController {
         header = StretchyTableHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height / 1.75))
         self.tableView.tableHeaderView = header
         
-        viewModel?.dataRequest(urlString: "https://api.themoviedb.org/3/movie/\(viewModel?.movie_id ?? 0)?api_key=3976da82325caf5b8df23f3e91560b5b&language=en-US",
-                               httpMethod: .get) { movie in
-            self.movie = movie
+        viewModel?.dataRequest(urlString: Links.detailInfo(viewModel?.movie_id).rawValue,
+                               httpMethod: .get) { [weak self] movie in
+            self?.movie = movie
         }
     }
     
@@ -52,6 +52,7 @@ class InfoVC: UIViewController {
     
     
     private func setNavigationStyle() {
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.title = ""
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9180000627, green: 0.9180000627, blue: 0.9180000627, alpha: 1)
@@ -60,8 +61,8 @@ class InfoVC: UIViewController {
     private func addTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.frame = self.view.bounds
-        tableView.center = self.view.center
+        //tableView.frame = self.view.bounds
+        //tableView.center = self.view.center
         tableView.separatorStyle = .none
         
         self.view.addSubview(tableView)

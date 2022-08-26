@@ -44,7 +44,6 @@ final class InfoTableViewCell: UITableViewCell {
             valueLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor),
             valueLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10),
             valueLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
-            //valueLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -10)
         ])
     }
 }

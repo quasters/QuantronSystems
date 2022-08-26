@@ -22,7 +22,7 @@ final class MainVC: UIViewController {
             addConstraints()
         }
         
-        viewModel?.dataRequest(urlString: "https://api.themoviedb.org/3/trending/all/day?api_key=3976da82325caf5b8df23f3e91560b5b",
+        viewModel?.dataRequest(urlString: Links.popularMovies.rawValue,
                                httpMethod: .get) { [collectionBackgroundView, viewModel] in
             collectionBackgroundView?.items = viewModel?.movies
         }

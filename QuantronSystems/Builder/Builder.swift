@@ -15,16 +15,16 @@ final class Builder: BuilderProtocol {
         return vc
     }
     
-    public func createSearchModule(coordinator: Coordinator) -> UIViewController {
+    public func createSearchModule(completion: ((Int) -> Void)?) -> UIViewController {
         let vc = SearchVC()
-        let vm = SearchVM(coordinator: coordinator)
+        let vm = SearchVM(completion: completion)
         vc.viewModel = vm
         return vc
     }
     
     public func createInfoModule(movie_id: Int, completion: (() -> Void)?) -> UIViewController {
         let vc = InfoVC()
-        let vm = InfoVM(movie_id: movie_id,completion: completion)
+        let vm = InfoVM(movie_id: movie_id, completion: completion)
         vc.viewModel = vm
         return vc
     }
