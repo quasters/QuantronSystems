@@ -6,11 +6,6 @@
 //
 
 import Foundation
-import UIKit
-
-protocol NetworkServiceProtocol: AnyObject {
-    func request(urlString: String, httpMethod: HTTPMethod, completion: @escaping (Result<Data, Error>) -> Void)
-}
 
 final class NetworkService: NetworkServiceProtocol {
     public func request(urlString: String, httpMethod: HTTPMethod, completion: @escaping (Result<Data, Error>) -> Void) {

@@ -26,6 +26,7 @@ final class SearchVC: UIViewController {
         headerView.layer.cornerRadius = 22
         headerView.layer.masksToBounds = true
         headerView.configure { [weak self] text in
+            self?.tableView.link = text
             self?.viewModel?.dataRequest(urlString: Links.find(text).rawValue, httpMethod: .get, { movies in
                 self?.tableView.model = movies
             })
@@ -43,9 +44,8 @@ final class SearchVC: UIViewController {
     }
     
     private func setUpTableView() {
-        tableView.configure { [weak self] id in
-            guard let id = id else { return }
-            self?.viewModel?.pushItemToShow(id: id)
+        tableView.configure { [weak self] id, link in
+            self?.viewModel?.showVC(id: id, link: link)
         }
         
         self.view.addSubview(tableView)

@@ -1,5 +1,5 @@
 //
-//  SearchedTableView.swift
+//  ListTableView.swift
 //  QuantronSystems
 //
 //  Created by Наиль Буркеев on 26.08.2022.
@@ -7,68 +7,62 @@
 
 import UIKit
 
-final class SearchedTableView: UIView {
-    public var link: String?
-    private let tableView = UITableView()
-    private var response: ((Int?, String?) -> Void)?
-    
-    var model: FoundMovies? {
+final class ListTableViewContainer: UIView, UITableViewDelegate, UITableViewDataSource  {
+    public var model: FoundMovies? {
         didSet {
             tableView.reloadData()
         }
     }
     
-    public func configure(response: ((Int?, String?) -> Void)?) {
-        self.response = response
-        setUpTableView()
-        addConstraints()
+    public var pageManagerDelegate: PageManagerCellDelegate? {
+        didSet {
+            tableView.reloadData()
+        }
     }
     
-    private func setUpTableView() {
+    private let tableView = UITableView()
+    private var response: ((Int?) -> Void)?
+    
+    public func configure(response: ((Int?) -> Void)?) {
+        self.response = response
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = #colorLiteral(red: 0.9692241322, green: 0.9692241322, blue: 0.9692241322, alpha: 1)
         
         self.addSubview(tableView)
-    }
-    
-    private func addConstraints() {
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            tableView.heightAnchor.constraint(equalTo: self.heightAnchor)
+            tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            tableView.widthAnchor.constraint(equalTo: self.widthAnchor)
         ])
     }
-}
-
-extension SearchedTableView: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let quantity = model?.results?.count
-        if let quantity = quantity {
-            return quantity <= 10 ? quantity : 11
-        } else {
-            return 0
-        }
+        return (quantity ?? 0) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellsQuantity = tableView.numberOfRows(inSection: indexPath.section)
-        if indexPath.row < cellsQuantity - 1 || cellsQuantity <= 10 {
+        if indexPath.row < cellsQuantity - 1 {
             let cell = SearchedTableViewCell()
             let movie = model?.results?[indexPath.row]
             cell.configure(imageUrl: movie?.poster_path, title: movie?.title, rating: movie?.vote_average)
             return cell
         } else {
-            let cell = ShowMoreTableViewCell()
-            cell.configure(text: "Show remaining \((model?.total_results ?? cellsQuantity) - cellsQuantity) items")
+            let cell = PageManagerCell()
+            cell.configure(currentPage: model?.page ?? 1, totalPages: model?.total_pages ?? 1, delegate: pageManagerDelegate)
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellsQuantity = tableView.numberOfRows(inSection: indexPath.section)
-        if indexPath.row < cellsQuantity - 1 || cellsQuantity <= 10 {
+        if indexPath.row < cellsQuantity - 1 {
             return 100
         } else {
             return 80
@@ -77,11 +71,9 @@ extension SearchedTableView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellsQuantity = tableView.numberOfRows(inSection: indexPath.section)
-        if indexPath.row < cellsQuantity - 1 || cellsQuantity <= 10 {
+        if indexPath.row < cellsQuantity - 1 {
             let movie = model?.results?[indexPath.row]
-            response?(movie?.id, nil)
-        } else {
-            response?(nil, link)
+            response?(movie?.id)
         }
     }
 }

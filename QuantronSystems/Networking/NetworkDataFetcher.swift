@@ -6,11 +6,6 @@
 //
 
 import Foundation
-import UIKit
-
-protocol NetworkDataFetcherProtocol: AnyObject {
-    func fetchData<T>(urlString: String, httpMethod: HTTPMethod, response: @escaping (T?) -> Void) where T: Decodable
-}
 
 final class NetworkDataFetcher: NetworkDataFetcherProtocol {
     private let networkService: NetworkServiceProtocol = NetworkService()

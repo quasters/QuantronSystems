@@ -15,7 +15,7 @@ final class Builder: BuilderProtocol {
         return vc
     }
     
-    public func createSearchModule(completion: ((Int) -> Void)?) -> UIViewController {
+    public func createSearchModule(completion: ((Int?, String?) -> Void)?) -> UIViewController {
         let vc = SearchVC()
         let vm = SearchVM(completion: completion)
         vc.viewModel = vm
@@ -25,6 +25,13 @@ final class Builder: BuilderProtocol {
     public func createInfoModule(movie_id: Int, completion: (() -> Void)?) -> UIViewController {
         let vc = InfoVC()
         let vm = InfoVM(movie_id: movie_id, completion: completion)
+        vc.viewModel = vm
+        return vc
+    }
+    
+    public func createListModule(link: String, completion: ((Int?) -> Void)?) -> UIViewController {
+        let vc = ListVC()
+        let vm = ListVM(link: link, completion: completion)
         vc.viewModel = vm
         return vc
     }

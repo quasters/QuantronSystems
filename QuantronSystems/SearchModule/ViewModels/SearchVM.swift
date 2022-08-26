@@ -7,16 +7,11 @@
 
 import Foundation
 
-protocol SearchViewModelInput {
-    func dataRequest(urlString: String, httpMethod: HTTPMethod, _ completion: @escaping (FoundMovies?) -> Void)
-    func pushItemToShow(id: Int)
-}
-
 final class SearchVM: SearchViewModelInput {
-    private var completion: ((Int) -> Void)?
+    private var completion: ((Int?, String?) -> Void)?
     private var network: NetworkDataFetcherProtocol
     
-    init(completion: ((Int) -> Void)?, network: NetworkDataFetcherProtocol = NetworkDataFetcher()) {
+    init(completion: ((Int?, String?) -> Void)?, network: NetworkDataFetcherProtocol = NetworkDataFetcher()) {
         self.completion = completion
         self.network = network
     }
@@ -27,7 +22,7 @@ final class SearchVM: SearchViewModelInput {
         }
     }
     
-    public func pushItemToShow(id: Int) {
-        completion?(id)
+    public func showVC(id: Int?, link: String?) {
+        completion?(id, link)
     }
 }

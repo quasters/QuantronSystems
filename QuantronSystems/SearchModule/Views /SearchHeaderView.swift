@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SearchHeaderView: UIView, UITextFieldDelegate {
+final class SearchHeaderView: UIView, UITextFieldDelegate {    
     private let textField = UITextField()
     private let button = UIButton()
     private var response: ((String?) -> Void)?

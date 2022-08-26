@@ -22,6 +22,13 @@ final class MainCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.posterImageView.dataTask?.cancel()
+        self.posterImageView.dataTask = nil
+    }
+    
     private func setUpPosterImageView() {
         let urlString = Links.imageLink(item?.poster_path).rawValue
         posterImageView.loadImage(urlString: urlString)
@@ -56,12 +63,5 @@ final class MainCollectionViewCell: UICollectionViewCell {
             titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -indent),
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -indent),
         ])
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        self.posterImageView.dataTask?.cancel()
-        self.posterImageView.dataTask = nil
     }
 }

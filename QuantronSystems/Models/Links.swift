@@ -27,7 +27,7 @@ enum Links {
                 .components(separatedBy: " ")
                 .filter { !$0.isEmpty }
                 .joined(separator: "%20")
-            return "https://api.themoviedb.org/3/search/movie?api_key=3976da82325caf5b8df23f3e91560b5b&language=en-US&query=\(queryName)&page=\(page)&include_adult=fals"
+            return "https://api.themoviedb.org/3/search/movie?api_key=3976da82325caf5b8df23f3e91560b5b&language=en-US&query=\(queryName)&page=\(page)&include_adult=true"
         }
     }
 }
