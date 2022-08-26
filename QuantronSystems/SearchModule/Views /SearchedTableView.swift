@@ -15,6 +15,10 @@ final class SearchedTableView: UIView {
     var model: FoundMovies? {
         didSet {
             tableView.reloadData()
+            let indexPath = IndexPath(row: 0, section: 0)
+            if 0 < tableView.numberOfRows(inSection: indexPath.section) {
+                tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
         }
     }
     

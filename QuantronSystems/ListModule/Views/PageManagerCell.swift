@@ -78,7 +78,6 @@ final class PageManagerCell: UITableViewCell {
     
     @objc
     private func reloadData(_ sender: UIButton) {
-        print(sender.tag)
         delegate?.reloadData(page: sender.tag)
     }
     
