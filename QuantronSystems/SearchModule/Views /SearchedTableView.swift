@@ -27,6 +27,7 @@ final class SearchedTableView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.backgroundColor = #colorLiteral(red: 0.9692241322, green: 0.9692241322, blue: 0.9692241322, alpha: 1)
         
         self.addSubview(tableView)
     }
@@ -58,18 +59,28 @@ extension SearchedTableView: UITableViewDataSource, UITableViewDelegate {
             cell.configure(imageUrl: movie?.poster_path, title: movie?.title, rating: movie?.vote_average)
             return cell
         } else {
-            let cell = UITableViewCell()
-            cell.textLabel?.text = "Show all results: \(model?.total_results ?? 0) items"
+            let cell = ShowMoreTableViewCell()
+            cell.configure(text: "Show remaining \((model?.total_results ?? cellsQuantity) - cellsQuantity) items")
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        let cellsQuantity = tableView.numberOfRows(inSection: indexPath.section)
+        if indexPath.row < cellsQuantity - 1 || cellsQuantity <= 10 {
+            return 100
+        } else {
+            return 80
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movie = model?.results?[indexPath.row]
-        response?(movie?.id)
+        let cellsQuantity = tableView.numberOfRows(inSection: indexPath.section)
+        if indexPath.row < cellsQuantity - 1 || cellsQuantity <= 10 {
+            let movie = model?.results?[indexPath.row]
+            response?(movie?.id)
+        } else {
+            // FIXME: - add vc
+        }
     }
 }

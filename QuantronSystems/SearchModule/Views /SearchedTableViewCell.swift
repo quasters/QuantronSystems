@@ -19,6 +19,7 @@ final class SearchedTableViewCell: UITableViewCell {
     
     public func configure(imageUrl: String?, title: String?, rating: Float?) {
         self.selectionStyle = .none
+        self.backgroundColor = #colorLiteral(red: 0.9845411249, green: 0.9845411249, blue: 0.9845411249, alpha: 1)
         
         posterImageView.loadImage(urlString: Links.imageLink(imageUrl).rawValue)
         titleLabel.text = title ?? "Unknown"
@@ -55,7 +56,7 @@ final class SearchedTableViewCell: UITableViewCell {
     private func addConstraints() {
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            posterImageView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            posterImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
             posterImageView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -20),
             posterImageView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 9/16),
             posterImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
@@ -70,7 +71,7 @@ final class SearchedTableViewCell: UITableViewCell {
         
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            ratingLabel.rightAnchor.constraint(equalTo: self.rightAnchor),
+            ratingLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
             ratingLabel.widthAnchor.constraint(equalToConstant: 30),
             ratingLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])

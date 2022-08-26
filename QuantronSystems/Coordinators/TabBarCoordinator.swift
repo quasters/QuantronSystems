@@ -52,24 +52,22 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
         
         switch page {
         case .main:
-            let vc = builder.createMainModule { [weak self] id in
-                self?.showInfoModule(with: id)
+            let vc = builder.createMainModule { [showInfoModule] id in
+                showInfoModule(id)
             }
             navController.pushViewController(vc, animated: true)
             
         case .search:
-            let vc = builder.createSearchModule { [weak self] id in
-                self?.showInfoModule(with: id)
+            let vc = builder.createSearchModule { [showInfoModule] id in
+                showInfoModule(id)
             }
             navController.pushViewController(vc, animated: true)
         }
-        
         return navController
     }
     
     private func showInfoModule(with id: Int) {
         let vc = builder.createInfoModule(movie_id: id, completion: nil)
-        print("ok")
         navigationController.pushViewController(vc, animated: true)
     }
     

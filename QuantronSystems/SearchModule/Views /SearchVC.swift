@@ -51,8 +51,8 @@ final class SearchVC: UIViewController {
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
-            tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
+            tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
             tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])

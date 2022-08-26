@@ -44,6 +44,7 @@
 		D1C34D4528B3F91E005F138C /* CollectionBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C34D4428B3F91E005F138C /* CollectionBackgroundView.swift */; };
 		D1C34D4728B40590005F138C /* LayoutCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C34D4628B40590005F138C /* LayoutCreator.swift */; };
 		D1C4748828B6C6DE00D4CF1A /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C4748728B6C6DE00D4CF1A /* CachedImageView.swift */; };
+		D1ED83AF28B87BA600B9D71A /* ShowMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ED83AE28B87BA600B9D71A /* ShowMoreTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		D1C34D4428B3F91E005F138C /* CollectionBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBackgroundView.swift; sourceTree = "<group>"; };
 		D1C34D4628B40590005F138C /* LayoutCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutCreator.swift; sourceTree = "<group>"; };
 		D1C4748728B6C6DE00D4CF1A /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
+		D1ED83AE28B87BA600B9D71A /* ShowMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				D10C634D28B8571D001F9A7A /* SearchHeaderView.swift */,
 				D10C634F28B861E5001F9A7A /* SearchedTableView.swift */,
 				D10C635228B866AA001F9A7A /* SearchedTableViewCell.swift */,
+				D1ED83AE28B87BA600B9D71A /* ShowMoreTableViewCell.swift */,
 			);
 			path = "Views ";
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				D1C34D2428B3CC66005F138C /* TabBarCoordinator.swift in Sources */,
 				D1C34D3128B3D663005F138C /* Builder.swift in Sources */,
 				D1C34D4128B3E0E1005F138C /* MainModel.swift in Sources */,
+				D1ED83AF28B87BA600B9D71A /* ShowMoreTableViewCell.swift in Sources */,
 				D1C34D2A28B3CE72005F138C /* MainVM.swift in Sources */,
 				D129B60928B51CD0002EF9F5 /* MainCollectionViewCell.swift in Sources */,
 				D10C634E28B8571D001F9A7A /* SearchHeaderView.swift in Sources */,
